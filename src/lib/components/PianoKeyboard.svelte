@@ -1,41 +1,10 @@
 <script lang="ts">
+	import { Note, sampler } from '$lib/note'
 	import { onMount } from 'svelte'
-	import * as Tone from 'tone'
-
-	// navigator.permissions.query({
-	// 	// @ts-ignore
-	// 	name: 'midi',
-	// 	sysex: true
-	// }).then(result => {
-	// 	alert(result.state)
-	// })
-
-	// let midi: any
-
-	// $: console.log(midi)
-
-	// navigator.requestMIDIAccess().then((ma) => midi = ma)
 
 	let { showKeys = $bindable(false) }: { showKeys?: boolean } = $props()
 
 	const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'] as const
-
-	const urls: Record<string, string> = {
-		'A0': 'A0.mp3',
-		'C8': 'C8.mp3',
-	}
-
-	for (let note of ['C', 'D#', 'F#', 'A']) {
-		for (let octave = 1; octave <= 7; octave++) {
-			urls[note + octave] = note.replace('#', 's') + octave + '.mp3'
-		}
-	}
-
-	const sampler = new Tone.Sampler({
-		urls,
-		release: 1,
-		baseUrl: "https://tonejs.github.io/audio/salamander/"
-	}).toDestination()
 
 	function playNote(note: string) {
 		sampler.triggerAttackRelease(note, '0.2n');
@@ -83,38 +52,21 @@
 		window.addEventListener('keyup', handleKeyUp)
 
 		return () => {
+			window.removeEventListener('keydown', handleKeyDown)
 			window.removeEventListener('keyup', handleKeyUp)
 		}
 	})
 </script>
 
 <div class="keyboard" class:show-keys={showKeys}>
-	<button
-		onmousedown={() => playNote('A0')} 
-		class="white-key"
-	>A</button>
-	<button
-		onmousedown={() => playNote('A#0')} 
-		class="black-key"
-	>A#</button>
-	<button
-		onmousedown={() => playNote('B0')} 
-		class="white-key"
-	>H</button>
-	{#each [1, 2, 3, 4, 5, 6, 7] as octave}
-		{#each notes as note}
-			<button
-				onmousedown={() => playNote(note + octave)} 
-				class:active={pressedNotes.includes(note + octave)}
-				class:white-key={note.length === 1}
-				class:black-key={note.length === 2}
-			>{note}</button>
-		{/each}
+	{#each Array(88) as _, noteHeight}
+		{@const note = new Note(noteHeight)}
+		<button
+			class:active={pressedNotes.includes(note.getName())}
+			onmousedown={() => playNote(note.getName('#'))} 
+			class="{note.keyboardColor}-key"
+		>{note.getLetter()}</button>
 	{/each}
-	<button
-		onclick={() => playNote('C8')} 
-		class="white-key"
-	>C</button>
 </div>
 
 <style lang="scss">
