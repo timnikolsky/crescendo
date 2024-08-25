@@ -67,7 +67,10 @@
 			onmouseup={() => sampler.triggerRelease(note.getName('#'))} 
 			onmouseleave={() => sampler.triggerRelease(note.getName('#'))}
 			ontouchstart={() => sampler.triggerAttack(note.getName('#'))}
-			ontouchend={() => sampler.triggerRelease(note.getName('#'))} 
+			ontouchend={(e) => {
+				sampler.triggerRelease(note.getName('#'))
+				e.preventDefault()
+			}} 
 			class="{note.keyboardColor}-key"
 		>
 			{note.getLetter()}
