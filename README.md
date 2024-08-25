@@ -4,3 +4,5 @@
 </p>
 
 **Crescendo** is a platform for practising music theory and training absolute and relative pitch.
+
+(quick prototype)
