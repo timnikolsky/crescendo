@@ -86,6 +86,9 @@
 		user-select: none;
 		-ms-overflow-style: none;  /* IE and Edge */
   		scrollbar-width: none;  /* Firefox */
+		width: 100%;
+		overflow-x: scroll;
+		justify-content: center;
 
 		&.show-keys {
 			.white-key, .black-key {
@@ -114,6 +117,7 @@
 		justify-content: flex-end;
 		padding-bottom: 1rem;
 		color: transparent;
+		flex-shrink: 0;
 
 		&:active, &.active {
 			background: linear-gradient(#E5E5E5, #E5E5E5);
@@ -140,6 +144,7 @@
 		padding-bottom: 0.5rem;
 		font-size: 0.75rem;
 		color: transparent;
+		flex-shrink: 0;
 
 		&:active, &.active {
 			background: linear-gradient(black, black);;

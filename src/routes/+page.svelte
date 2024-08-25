@@ -54,7 +54,7 @@
 		justify-content: center;
 		background: #efdac9;
 		padding: 2rem 0;
-		overflow-y: hidden;
+		overflow: hidden;
 	}
 
 	.card {
