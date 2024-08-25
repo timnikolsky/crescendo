@@ -65,7 +65,12 @@
 			class:active={pressedNotes.includes(note.getName())}
 			onmousedown={() => playNote(note.getName('#'))} 
 			class="{note.keyboardColor}-key"
-		>{note.getLetter()}</button>
+		>
+			{note.getLetter()}
+			{#if note.cMajorIndex === 0}
+				<span class="octave-index">{note.octave}</span>
+			{/if}
+		</button>
 	{/each}
 </div>
 
@@ -88,7 +93,6 @@
   		scrollbar-width: none;  /* Firefox */
 		width: 100%;
 		overflow-x: scroll;
-		justify-content: center;
 
 		&.show-keys {
 			.white-key, .black-key {
@@ -118,6 +122,7 @@
 		padding-bottom: 1rem;
 		color: transparent;
 		flex-shrink: 0;
+		position: relative;
 
 		&:active, &.active {
 			background: linear-gradient(#E5E5E5, #E5E5E5);
@@ -151,5 +156,12 @@
 			box-shadow: inset 0 0rem 2px black;
 			padding-bottom: 2px;
 		}
+	}
+
+	.octave-index {
+		position: absolute;
+		left: 0.5rem;
+		top: 0.25rem;
+		color: gray;
 	}
 </style>
