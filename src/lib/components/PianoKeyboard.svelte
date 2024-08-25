@@ -63,7 +63,11 @@
 		{@const note = new Note(noteHeight)}
 		<button
 			class:active={pressedNotes.includes(note.getName())}
-			onmousedown={() => playNote(note.getName('#'))} 
+			onmousedown={() => sampler.triggerAttack(note.getName('#'))}
+			onmouseup={() => sampler.triggerRelease(note.getName('#'))} 
+			onmouseleave={() => sampler.triggerRelease(note.getName('#'))}
+			ontouchstart={() => sampler.triggerAttack(note.getName('#'))}
+			ontouchend={() => sampler.triggerRelease(note.getName('#'))} 
 			class="{note.keyboardColor}-key"
 		>
 			{note.getLetter()}
