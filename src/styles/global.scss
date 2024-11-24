@@ -1,0 +1,35 @@
+@import './variables.scss';
+
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: var(--color-background);
+	color: var(--color-foreground);
+	-webkit-font-smoothing: antialiased;
+	font-family: 'Merriweather';
+	font-size: 16px;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+}
+
+p {
+	font-size: 1rem;
+}
+
+a {
+	color: var(--color-foreground-accent);
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
+
+	&:visited {
+		text-decoration: none;
+	}
+}

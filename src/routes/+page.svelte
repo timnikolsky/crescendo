@@ -1,78 +1,73 @@
 <script lang="ts">
-	import PianoKeyboard from '$lib/components/PianoKeyboard.svelte'
-	import { getRandomNote, Note, sampler } from '$lib/note'
-
-	let showKeys = $state(false)
-	let showCurrentNote = $state(false)
-	let currentNote = $state(getRandomNote(new Note('C3').height, new Note('C6').height))
+	import Container from '$lib/components/Container.svelte'
 </script>
 
-<div class="card">
-	<span class="current-note">{showCurrentNote ? currentNote.getName() : '?'}</span>
-	<div class="buttons">
-		<button
-			onclick={() => showCurrentNote = true}
-			disabled={showCurrentNote}
-		>
-			Reveal
-		</button>
-		<button
-			onclick={() => sampler.triggerAttackRelease(currentNote.getName(), 1000)}
-		>
-			Play
-		</button>
-		<button
-			onclick={() => {
-				showCurrentNote = false
-				currentNote = getRandomNote(new Note('C3').height, new Note('C6').height)
-				sampler.triggerAttackRelease(currentNote.getName(), 1000)
-			}}>
-			New note
-		</button>
+<Container>
+	<div class="intro">
+		<h1 class="intro-title">Crescendo</h1>
+		<span class="intro-credits">Made by <a href="https://timnik.me/">Tim Nikolsky</a></span>
 	</div>
-	<label>
-		<input type="checkbox" bind:checked={showKeys}>
-		Show keys
-	</label>
-</div>
+	<div class="cards">
+		<a href="/solfegio" class="card">
+			<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M55.8997 16.5799C56.4682 22.4079 52.1358 27.1243 48.299 30.9368C46.5561 32.609 48.01 31.2127 47.099 32.0442C46.9085 31.1512 46.5423 28.8172 46.5766 28.1107C46.8197 23.0887 50.9012 15.8303 54.4773 13.1531C55.0533 14.2282 55.5268 14.3147 55.8997 16.5799ZM57.1133 46.6718C54.8166 44.9828 51.8003 44.5391 49.0346 45.022C48.6779 42.6824 48.3211 40.3428 47.9645 38.0051C52.3465 33.6634 57.1114 28.6241 57.3612 22.086C57.4712 17.9251 56.8467 13.3776 54.2331 9.99927C51.0632 10.2383 48.8278 14.0185 47.1456 16.3683C44.37 21.3466 45.0178 27.3986 46.083 32.7667C44.5741 34.5414 42.4858 36.016 40.9986 37.8634C36.6063 42.166 32.7803 47.986 33.5332 54.4138C33.875 60.629 38.3604 66.408 44.4764 67.8863C46.7987 68.4736 49.256 68.5314 51.6053 68.0709C52.0152 72.2653 53.5191 76.7003 51.7777 80.7717C50.4715 83.7507 46.5813 86.3717 43.7011 84.858C42.5837 84.2689 43.4891 84.7629 42.81 84.3882C44.8043 83.9091 46.5377 82.4569 47.0231 81.4708C48.5849 78.7416 46.2778 74.6869 43.005 75.2108C38.7882 75.2965 37.0575 81.0644 39.7695 83.9445C42.2802 86.7781 46.915 86.3904 49.8923 84.5374C53.2711 82.3376 53.6943 77.9306 53.3084 74.1687C53.1779 72.9048 52.5572 69.1913 52.4807 67.8546C53.7801 67.3905 52.8703 67.7447 54.7047 67.0176C59.6635 65.0546 62.827 59.078 61.4046 53.7408C60.8118 51.0023 59.4584 48.3085 57.1133 46.6718ZM58.1591 57.404C58.558 61.1156 56.1961 65.4592 52.4192 66.6504C52.1657 65.1683 52.0986 64.7657 51.9297 63.9007C51.0308 59.3148 50.5427 54.6039 49.8492 49.9546C52.8778 49.6414 56.2949 50.9669 57.3481 54.026C57.803 55.1017 57.9876 56.2575 58.1591 57.404ZM48.5611 67.0903C43.8184 67.3532 39.241 64.1169 38.0576 59.4825C36.6613 55.4689 37.0728 50.8513 39.5876 47.3578C41.6663 44.1849 44.4466 41.5695 47.0977 38.8887C47.4388 40.9897 47.78 43.0906 48.1211 45.1935C42.546 46.6513 38.7915 54.0018 42.1277 59.0836C43.1202 60.5078 45.8123 63.2277 47.2832 62.1297C45.2288 60.8565 43.5486 58.6642 43.9099 56.1139C43.7568 53.724 46.4637 50.6873 48.8524 50.1522C49.6697 55.5006 50.6072 61.4735 51.4245 66.8237C50.4823 67.0102 49.5209 67.0903 48.5611 67.0903Z" fill="black"/>
+			</svg>				
+			<span class="card-text">Solfegio course (soon)</span>
+		</a>
+		<a href="/pitch" class="card">
+			<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M48.0469 36C36.2095 36 32 42.2222 32 48C32 53.7778 36.2095 60 48.0469 60C59.8843 60 64 53.7778 64 48C64 42.2222 59.8843 36 48.0469 36ZM40.9284 44.0834C40.8346 43.7223 40.8346 43.3751 40.8346 43.014C40.8346 42.3056 41.0088 41.5973 41.3574 40.9723C41.9473 40.0834 42.9795 39.4584 44.2665 39.1945C45.3792 38.9307 45.9825 38.7501 48.2212 38.7501H48.3016C51.7336 38.7501 52.8463 42.0417 53.7981 45.4167L54.0527 46.3056C54.7365 48.6112 55.085 50.5695 55.085 52.0834C55.085 53.1528 54.9108 54.125 54.5622 54.8333C54.0527 55.8194 53.1947 56.4445 51.7335 56.7917C50.956 56.9722 49.6691 57.0554 49.6691 57.0554C49.2401 57.0554 48.9048 57.1527 48.5564 57.1527C45.8081 57.1527 44.0922 56.0832 42.899 52.2638C41.8668 48.9721 41.6925 48.0001 40.9284 44.0834Z" fill="#2C1F1B"/>
+			</svg>
+			<span class="card-text">Pitch Training</span>
+		</a>
+		<a href="/piano" class="card">
+			<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M48.0469 36C36.2095 36 32 42.2222 32 48C32 53.7778 36.2095 60 48.0469 60C59.8843 60 64 53.7778 64 48C64 42.2222 59.8843 36 48.0469 36ZM40.9284 44.0834C40.8346 43.7223 40.8346 43.3751 40.8346 43.014C40.8346 42.3056 41.0088 41.5973 41.3574 40.9723C41.9473 40.0834 42.9795 39.4584 44.2665 39.1945C45.3792 38.9307 45.9825 38.7501 48.2212 38.7501H48.3016C51.7336 38.7501 52.8463 42.0417 53.7981 45.4167L54.0527 46.3056C54.7365 48.6112 55.085 50.5695 55.085 52.0834C55.085 53.1528 54.9108 54.125 54.5622 54.8333C54.0527 55.8194 53.1947 56.4445 51.7335 56.7917C50.956 56.9722 49.6691 57.0554 49.6691 57.0554C49.2401 57.0554 48.9048 57.1527 48.5564 57.1527C45.8081 57.1527 44.0922 56.0832 42.899 52.2638C41.8668 48.9721 41.6925 48.0001 40.9284 44.0834Z" fill="#2C1F1B"/>
+			</svg>
+			<span class="card-text">Piano</span>
+		</a>
+	</div>
+</Container>
 
-<PianoKeyboard {showKeys}/>
+<style lang="scss">
+	@import "../styles/mixins.scss";
 
-<style>
-	:global(*) {
-		box-sizing: border-box;
-		-webkit-tap-highlight-color: transparent;
-	}
-
-	:global(body) {
-		font-family: sans-serif;
+	.intro {
 		display: flex;
 		flex-direction: column;
-		height: 100vh;
-		gap: 1rem;
 		align-items: center;
 		justify-content: center;
-		background: #efdac9;
-		padding: 2rem 0;
-		overflow: hidden;
+		gap: 1rem;
+		margin-bottom: 3rem;
+	}
+
+	.intro-title {
+		font-size: 3rem;
+		line-height: 3.5rem;
+	}
+
+	.cards {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
 	}
 
 	.card {
-		background: #f3e7de;
-		padding: 1rem;
+		@include card;
+		cursor: pointer;
 		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 1rem;
 		flex-direction: column;
-		width: 100%;
-		max-width: 32rem;
-		border-radius: 0.5rem;
-		border: 1px solid #e4c6ae;
+		align-items: center;
+		gap: 1rem;
+
+		&:first-child {
+			grid-column: span 2;
+		}
 	}
 
-	.current-note {
-		font-size: 2rem;
-		font-family: 'Times New Roman', Times, serif;
+	.card-text {
+		font-size: 1.25rem;
+		line-height: 1.5rem;
+		font-weight: 400;
 	}
 </style>

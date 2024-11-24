@@ -36,15 +36,23 @@
 	}
 
 	function handleKeyDown(e: KeyboardEvent) {
-		if (keyToNoteMap[e.key] && !pressedNotes.includes(keyToNoteMap[e.key])) {
-			pressedNotes.push(keyToNoteMap[e.key])
-			sampler.triggerAttack(keyToNoteMap[e.key])
+		let key = e.key.toLowerCase()
+		if (keyToNoteMap[key] && !pressedNotes.includes(keyToNoteMap[key])) {
+			pressedNotes.push(keyToNoteMap[key])
+			sampler.triggerAttack(keyToNoteMap[key])
 		}
 	}
 
 	function handleKeyUp(e: KeyboardEvent) {
-		pressedNotes = pressedNotes.filter(n => n !== keyToNoteMap[e.key])
-		sampler.triggerRelease(keyToNoteMap[e.key])
+		let key = e.key.toLowerCase()
+		if (key === 'shift') {
+			pressedNotes.forEach(note => sampler.triggerRelease(note))
+			pressedNotes = []
+		}
+		if (!e.shiftKey) {
+			pressedNotes = pressedNotes.filter(n => n !== keyToNoteMap[key])
+			sampler.triggerRelease(keyToNoteMap[key])
+		}
 	}
 
 	onMount(() => {
@@ -98,7 +106,7 @@
 		user-select: none;
 		-ms-overflow-style: none;  /* IE and Edge */
   		scrollbar-width: none;  /* Firefox */
-		width: 100%;
+		max-width: 100%;
 		overflow-x: scroll;
 
 		&.show-keys {
